@@ -12,6 +12,23 @@ button.onclick = function ()
     span.innerHTML = result;
 }
 
+$(document).ready(function ()
+{
+    getPrice();
+});
+
+function getPrice()
+{
+    $.get(
+        "https://api.coindesk.com/v1/bpi/currentprice.json",
+        function (data)
+        {
+            let div = document.querySelector('.coindesk');
+            data = JSON.parse(data);
+            div.innerHTML = 'Курс BTC в данний час: ' + data.bpi.USD.rate + ' USD';
+        }
+    );
+}
 ===========================HTML==================================
 <!DOCTYPE html>
 <html lang="en">
@@ -20,27 +37,35 @@ button.onclick = function ()
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitcoin API</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body class="body">
     <div>
         <h1>Дізнайся кількість Bitcoin, яку Ти можешь купити :)</h1>
     </div>
-    <div class="container">
+    <span class="container">
         <div class="input-course">
             <span>What is Bitcoin price today?</span>
             <input type="text" class="input-price" value="">
             <span>How much $ do you have?</span>
-            <input type="text" class="input-cash" value="">
-            <button>Give Result</button>
+            <div class="button">
+                <input type="text" class="input-cash" value="">
+                <button>Give Result</button>
+            </div>
         </div>
         <div class="result">
             <span>Ти можешь купити:</span>
             <span class="out-result">***</span>
             <span>BTC</span>
         </div>
-    </div>
-    <script src="Btc.js"></script>
+
+        <div class="update-price">
+            <span class="coindesk"></span>
+            <button onclick="getPrice()">Update Price</button>
+        </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="Btc.js"></script>
 </body>
 </html>
 
