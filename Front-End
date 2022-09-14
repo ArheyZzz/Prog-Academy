@@ -1,0 +1,12 @@
+let inputPrice = document.querySelector('.input-price');
+let inputCashe = document.querySelector('.input-cash');
+let button = document.querySelector('button');
+let span = document.querySelector('.out-result');
+
+button.onclick = function ()
+{
+    let price = inputPrice.value;
+    let cashe = inputCashe.value;
+    let result = cashe / price;
+    span.innerHTML = result;
+}
